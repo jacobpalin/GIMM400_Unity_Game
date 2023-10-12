@@ -7,14 +7,16 @@ public class PlayerHealth : MonoBehaviour
     public float health;
     public float maxHealth;
     public Image healthBar;
+    public GameObject UI;
     // Start is called before the first frame update
     void Start()
     {
         maxHealth = health;
+        //UI = Instantiate(UI, transform.position, transform.rotation);
         GameObject healthBar = GameObject.FindGameObjectWithTag("Player1Health");
-      // if(imageObject != null)
-        //{
-          //  healthBar = imageObject.GetComponent<imageObject>();
+       //if(imageObject != null)
+       // {
+         //   healthBar = imageObject.GetComponent<imageObject>();
         //}
     }
 
