@@ -1038,6 +1038,7 @@ GameObject:
   - component: {fileID: 135756642000475821}
   - component: {fileID: 4416926081852918493}
   - component: {fileID: 8876505865972753276}
+  - component: {fileID: -8967624707502331848}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -1055,7 +1056,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8338988566280778637}
@@ -1123,8 +1124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
-  SprintSpeed: 5.335
+  MoveSpeed: 20
+  SprintSpeed: 20
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
@@ -1140,7 +1141,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
   FootstepAudioVolume: 0.3
-  JumpHeight: 1.2
+  JumpHeight: 0
   Gravity: -15
   JumpTimeout: 0.3
   FallTimeout: 0.15
@@ -1189,8 +1190,8 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   analogMovement: 0
-  cursorLocked: 1
-  cursorInputForLook: 1
+  cursorLocked: 0
+  cursorInputForLook: 0
 --- !u!114 &4416926081852918493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,8 +1304,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   maxHealth: 0
+<<<<<<< Updated upstream
   healthBar: {fileID: 9173631285861533557}
   UI: {fileID: 3421909039217881214, guid: 46a4c6a79f079244fbb66eb7dd4ccc27, type: 3}
+=======
+  healthBar: {fileID: 0}
+--- !u!114 &-8967624707502331848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1988ba0aacf468746a2099344a660b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 4242399512326462724, guid: 91451fb0e6b2bf843b0e992b85db5d0b, type: 3}
+  projectileSpeed: 50
+>>>>>>> Stashed changes
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0
