@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7719123217968344312}
   - component: {fileID: 3535654921199016809}
   - component: {fileID: 4443467843316461564}
-  - component: {fileID: 8908057146466401754}
   m_Layer: 0
   m_Name: Test Weapon Projectile
   m_TagString: Untagged
@@ -119,30 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b73bf9c265e4646aa21d4a0454eae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &8908057146466401754
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4242399512326462724}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  projectileSpeed: 50

@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class WeaponTest : MonoBehaviour
 {
-    private Rigidbody _rb;
+    [SerializeField] private float projectileSpeed;
 
-    private void Awake()
+    private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        Destroy(this.gameObject, 5f);
+    }
+    public void Fire(float speed)
+    {
+        projectileSpeed = speed;
     }
 
-    public void Fire(float speed, Vector3 direction)
+    private void Update()
     {
-        _rb.velocity = direction * speed;
+        this.transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
     }
 }

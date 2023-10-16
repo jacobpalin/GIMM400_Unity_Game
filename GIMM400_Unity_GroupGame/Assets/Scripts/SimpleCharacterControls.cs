@@ -5,20 +5,25 @@ using UnityEngine;
 public class SimpleCharacterControls : MonoBehaviour
 {
     public GameObject currentWeapon;
-    public float projectileSpeed = 50;
+    public GameObject currentWeaponProjectile;
+    [SerializeField] private GameObject firePoint;
+
+    [SerializeField] private float cooldown;
+    private float timer;
     void Update()
     {
-        //simple movement
-        /*float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        float speed = 5.0f;
-
-        transform.position = new Vector3(horizontal, 0, vertical) * speed * Time.deltaTime;*/
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.F) && timer <= 0)
         {
-            Instantiate(currentWeapon, this.transform.position, Quaternion.identity);
-            currentWeapon.GetComponent<WeaponTest>().Fire(projectileSpeed, transform.forward);
+            timer = cooldown;
+            Instantiate(currentWeaponProjectile, firePoint.transform.position, firePoint.transform.rotation);
         }
+        else
+        {
+            timer -= Time.deltaTime;
+        }
+
+        /*//if weapon picked up, change currentWeapon
+         * then set currentWeaponProjectile to the respective projectile on that weapon
+        */
     }
 }
