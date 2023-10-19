@@ -22,10 +22,10 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         //healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 3);
-    }
+    //}
     void OnTriggerEnter (Collider other)
     {
         if (other.gameObject.tag == "Player")
