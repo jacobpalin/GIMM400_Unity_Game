@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CinemachineTarget
   - Player1Health
+  - Player2
+  - Player1
   layers:
   - Default
   - TransparentFX
