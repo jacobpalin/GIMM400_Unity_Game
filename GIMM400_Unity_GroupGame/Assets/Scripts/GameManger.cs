@@ -7,55 +7,126 @@ using UnityEngine.UI;
 
 public class GameManger : MonoBehaviour
 {
+    [Header("UIs")]
     public GameObject UI;
-
-    [SerializeField] private float gameTimer;
-    private float timer;
-    [SerializeField] private Text timerText;
-
+    [SerializeField] private GameObject timerUI;
     [SerializeField] private GameObject gameOverUI;
-    [SerializeField] private Text winnerText;
+    [SerializeField] private GameObject pressStartUI;
+
+    [Header("Players")]
     public GameObject player1;
     public GameObject player2;
+    
+    [Header("UI Elements")]
+    [SerializeField] private Text timerText;
+    [SerializeField] private Text startTimerText;
+    [SerializeField] private Text winnerText;
+    [SerializeField] private GameObject player1Ready;
+    [SerializeField] private GameObject player1NotReady;
+    [SerializeField] private GameObject player2Ready;
+    [SerializeField] private GameObject player2NotReady;
 
-    // Start is called before the first frame update
+    [Space(20)]
+    [SerializeField] private float gameTimer;
+    private float timer;
+    private bool gameStarted;
+    [SerializeField] private float startCountdown;
+    private float startTimer;
+
     void Start()
     {
+        Time.timeScale = 0;
+
         //UI = Instantiate(UI, transform.position, transform.rotation);
-        gameOverUI.gameObject.SetActive(false);
+
+        //uncomment when player ready up bool is made
+        /*player1Ready.SetActive(false);
+        player1NotReady.SetActive(true);
+        player2Ready.SetActive(false);
+        player2NotReady.SetActive(true);*/
+
+        timerUI.SetActive(false);
+        gameOverUI.SetActive(false);
+        pressStartUI.SetActive(true);
+        gameStarted = false;
         timer = gameTimer;
-        DisplayTime(timer);
+        startTimer = startCountdown;
+        startTimerText.text = "";
+
         //set player1/2 to gameobjects
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        //timerText.text = "Time: " + timer;
-        DisplayTime(timer);
-
-        if (timer <= 0 /*|| player1.health <= 0 || player2.health <= 0*/)
+        //uncomment when player ready up bool is made
+        /*if(player1.GetComponent < -----player script----->.ready == true)
         {
-            //game over
-            gameOverUI.SetActive(true);
-            Time.timeScale = 0;
-            timerText.enabled = false;
+            player1Ready.SetActive(true);
+            player1NotReady.SetActive(false);
+        }
+        else if (player1.GetComponent < -----player script----->.ready == false)
+        {
+            player1Ready.SetActive(false);
+            player1NotReady.SetActive(true);
+        }
+        if (player2.GetComponent < -----player script----->.ready == true)
+        {
+            player2Ready.SetActive(true);
+            player2NotReady.SetActive(false);
+        }
+        else if (player2.GetComponent < -----player script----->.ready == false)
+        {
+            player2Ready.SetActive(false);
+            player2NotReady.SetActive(true);
+        }*/
 
-            if(timer <= 0)
+        //uncomment when player ready up bool is made
+        //need to put Input.anyKey into player script and have it change a bool to make sure both players are ready
+        if (gameStarted == false && Input.anyKey/*player1.GetComponent<-----player script----->.ready == true && player2.GetComponent<-----player script----->.ready == true*/)
+        {
+            gameStarted = true;
+        }
+        if (gameStarted == true)
+        {
+            Time.timeScale = 1;
+            startTimer -= Time.deltaTime;
+            DisplayStartTime(startTimer);
+
+            if (startTimer <= 0)
             {
-                //sudden death maybe? shrink map border/1hp/no time limit
-                winnerText.text = "Tie";
+                //spawn players/items at this point
+
+                timerUI.SetActive(true);
+                pressStartUI.SetActive(false);
+
+                timer -= Time.deltaTime;
+                DisplayTime(timer);
+                //uncomment when player health is working
+                if (timer <= 0 /*|| player1.GetComponent<-----player script----->.health <= 0 || player2.GetComponent<-----player script----->.health <= 0*/)
+                {
+                    //game over
+                    gameOverUI.SetActive(true);
+                    Time.timeScale = 0;
+                    timerUI.SetActive(false);
+
+                    if (timer <= 0)
+                    {
+                        //sudden death maybe? shrink map border/1hp/no time limit
+                        winnerText.text = "Tie";
+                    }
+                    //uncomment when player health is working
+                    /*else if(player1.health <= 0)
+                    {
+                        winnerText.text = "Player 2 Wins";
+                    }
+                    else if(player2.health <= 0)
+                    {
+                        winnerText.text = "Player 1 Wins";
+                    }
+                     */
+                }
             }
-            /*else if(player1.health <= 0)
-            {
-                winnerText.text = "Player 2 Wins";
-            }
-            else if(player2.health <= 0)
-            {
-                winnerText.text = "Player 1 Wins";
-            }
-             */
         }
     }
 
@@ -66,17 +137,24 @@ public class GameManger : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public void MainMenuButton()
+    void DisplayStartTime(float timeToDisplay)
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("Main Menu");
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        startTimerText.text = seconds.ToString();
     }
 
     public void RestartButton()
     {
         Time.timeScale = 1;
         timer = gameTimer;
-        timerText.enabled = true;
+        gameStarted = false;
+        pressStartUI.SetActive(true);
+        startTimerText.text = "";
+        //uncomment if necessary when player ready up bool is made
+        /*player1Ready.SetActive(false);
+        player1NotReady.SetActive(true);
+        player2Ready.SetActive(false);
+        player2NotReady.SetActive(true);*/
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
