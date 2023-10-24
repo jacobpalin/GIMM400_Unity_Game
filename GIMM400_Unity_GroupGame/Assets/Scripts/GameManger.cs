@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameManger : MonoBehaviour
 {
+
+
     [Header("UIs")]
     public GameObject UI;
     [SerializeField] private GameObject timerUI;
@@ -16,7 +18,7 @@ public class GameManger : MonoBehaviour
     [Header("Players")]
     public GameObject player1;
     public GameObject player2;
-    
+
     [Header("UI Elements")]
     [SerializeField] private Text timerText;
     [SerializeField] private Text startTimerText;

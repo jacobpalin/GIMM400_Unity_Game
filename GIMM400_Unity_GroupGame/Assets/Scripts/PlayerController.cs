@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
+
     //Call input manager actions
     private PlayerInput playerInput;
     private CharacterController Controller;
@@ -45,5 +47,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
+
 }

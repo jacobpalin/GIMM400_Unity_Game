@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class SimpleCharacterControls : MonoBehaviour
 {
+
+
     public GameObject currentWeapon;
     public GameObject currentWeaponProjectile;
     [SerializeField] private GameObject firePoint;
