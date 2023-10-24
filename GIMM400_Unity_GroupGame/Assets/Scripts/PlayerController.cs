@@ -1,49 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    //Call input manager actions
-    private PlayerInput playerInput;
-    private CharacterController Controller;
-    //store actions for less bugs
-    private InputAction attackAction;
-    private InputAction moveAction;
-    private Vector3 movement;
-    private Rigidbody rb;
+    [SerializeField]
+    private float playerSpeed = 20.0f;
+    [SerializeField]
+    private float jumpHeight = 1.0f;
+    [SerializeField]
+    private float gravityValue = -9.81f;
+
+    private CharacterController controller;
     private Vector3 playerVelocity;
-    public float playerSpeed = 10.0F;
+    private bool groundedPlayer;
+    private Vector2 movementInput = Vector2.zero;
+    private bool attacked = false;
 
-    //start this when an input controller is turned on
-    private void Awake()
+    private void Start()
     {
-        Controller = gameObject.GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
-        attackAction = playerInput.actions["Attack"];
-        attackAction.ReadValue<float>();
-        moveAction = playerInput.actions["Move"];
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
+        controller = gameObject.GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
-    private void Update()
+    public void OnMove(InputAction.CallbackContext context) 
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        Controller.Move(move * Time.deltaTime * playerSpeed);
+        movementInput = context.ReadValue<Vector2>();    
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        attacked = context.action.triggered;
+    }
+
+    void Update()
+    {
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
+        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+        controller.Move(move * Time.deltaTime * playerSpeed);
 
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
         }
-    }
 
-   
+        // Changes the height position of the player..
+        if (attacked && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
 }
