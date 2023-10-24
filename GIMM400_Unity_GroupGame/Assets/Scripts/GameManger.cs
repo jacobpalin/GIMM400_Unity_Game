@@ -28,12 +28,10 @@ public class GameManger : MonoBehaviour
     [Space(20)]
     [SerializeField] private float gameTimer;
     private float timer;
-    [SerializeField] private Text timerText;
 
     [SerializeField] private GameObject gameOverUI;
-    [SerializeField] private Text winnerText;
-    public GameObject player1;
-    public GameObject player2;
+
+
 
     // Start is called before the first frame update
     void Start()
