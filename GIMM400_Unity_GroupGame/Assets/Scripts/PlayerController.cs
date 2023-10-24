@@ -6,11 +6,17 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float playerSpeed = 20.0f;
-    [SerializeField]
-    private float jumpHeight = 1.0f;
+    //[SerializeField]
+    //private float jumpHeight = 1.0f;
     [SerializeField]
     private float gravityValue = -9.81f;
-
+    //Attack variables
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask playerLayers;
+    
+    public int attackDamage = 1;
+    //controls variables
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -35,7 +41,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
@@ -48,11 +54,26 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.forward = move;
         }
 
-        // Changes the height position of the player..
-        if (attacked && groundedPlayer)
+        // this is when a player is attacking
+        if (attacked == true)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            //Play attack animation
+
+            //Detect enemies in range
+            UnityEngine.Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayers);
+            //Deal damage
+            foreach(UnityEngine.Collider player in hitEnemies)
+            {
+                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+                Debug.Log("We hit" + player.name);
+            }
         }
+        //void OnDrawGizmosSelected()
+        //{
+        //    if (attackPoint == null)
+        //        return;
+        //    Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        //}
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);

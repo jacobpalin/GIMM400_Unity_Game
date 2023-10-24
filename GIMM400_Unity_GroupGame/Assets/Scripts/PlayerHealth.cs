@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
-    public float playerHealth;
-    public float maxHealth;
+    //public float playerHealth;
+    public int maxHealth = 78;
+    int currentHealth;
     //public Image healthBar;
     //public GameObject UI;
     // Start is called before the first frame update
     void Start()
     {
-        playerHealth = 3.0f;
-        //maxHealth = health;
+        //playerHealth = 3.0f;
+        currentHealth = maxHealth;
         //UI = Instantiate(UI, transform.position, transform.rotation);
         //GameObject healthBar = GameObject.FindGameObjectWithTag("Player1Health");
        //if(imageObject != null)
@@ -26,11 +27,28 @@ public class PlayerHealth : MonoBehaviour
     //{
         //healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 3);
     //}
-    void OnTriggerEnter (Collider other)
+    public void TakeDamage(int damage)
     {
-        if (other.gameObject.tag == "Player")
+        currentHealth -= damage;
+        
+        //add hurt animation here
+        //animator.SetTrigger("Hurt");
+
+        if(currentHealth <= 0)
         {
-            playerHealth -=1;
+            Die();
         }
+    }
+
+    void Die()
+    {
+        Debug.Log("someone died!");
+        //Add Death animation here
+        //animator.SetBool("IsDead", true);
+        //disable other player
+        Destroy(gameObject);
+        this.enabled = false;
+        //GetComponent<Rigidbody>().enabled = false;
+        //GetComponent<CharacterController>().enabled = false;
     }
 }
