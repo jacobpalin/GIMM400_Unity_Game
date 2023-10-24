@@ -7,8 +7,25 @@ using UnityEngine.UI;
 
 public class GameManger : MonoBehaviour
 {
+
+
+    [Header("UIs")]
     public GameObject UI;
 
+    [Header("Players")]
+    public GameObject player1;
+    public GameObject player2;
+
+    [Header("UI Elements")]
+    [SerializeField] private Text timerText;
+    [SerializeField] private Text startTimerText;
+    [SerializeField] private Text winnerText;
+    [SerializeField] private GameObject player1Ready;
+    [SerializeField] private GameObject player1NotReady;
+    [SerializeField] private GameObject player2Ready;
+    [SerializeField] private GameObject player2NotReady;
+
+    [Space(20)]
     [SerializeField] private float gameTimer;
     private float timer;
     [SerializeField] private Text timerText;

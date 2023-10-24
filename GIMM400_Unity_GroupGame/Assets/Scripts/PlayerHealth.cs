@@ -16,16 +16,16 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         //UI = Instantiate(UI, transform.position, transform.rotation);
         //GameObject healthBar = GameObject.FindGameObjectWithTag("Player1Health");
-       //if(imageObject != null)
-       // {
-         //   healthBar = imageObject.GetComponent<imageObject>();
+        //if(imageObject != null)
+        // {
+        //   healthBar = imageObject.GetComponent<imageObject>();
         //}
     }
 
     // Update is called once per frame
     //void Update()
     //{
-        //healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 3);
+    //healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 3);
     //}
     public void TakeDamage(int damage)
     {
