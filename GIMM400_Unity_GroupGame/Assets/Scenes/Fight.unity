@@ -1046,7 +1046,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede1ffb56e946ca4c8e0bcd547142c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI: {fileID: 0}
+  UI: {fileID: 3421909039217881214, guid: 46a4c6a79f079244fbb66eb7dd4ccc27, type: 3}
+  timerUI: {fileID: 1540723024}
+  gameOverUI: {fileID: 270969752}
+  pressStartUI: {fileID: 1564333433}
   player1: {fileID: 0}
   player2: {fileID: 0}
   timerText: {fileID: 1883572315}
@@ -1057,7 +1060,7 @@ MonoBehaviour:
   player2Ready: {fileID: 2144350360}
   player2NotReady: {fileID: 1371186203}
   gameTimer: 90
-  gameOverUI: {fileID: 270969752}
+  startCountdown: 4
 --- !u!4 &1345888377
 Transform:
   m_ObjectHideFlags: 0
