@@ -6,16 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float playerSpeed = 20.0f;
-    //[SerializeField]
-    //private float jumpHeight = 1.0f;
-    [SerializeField]
-    private float gravityValue = -9.81f;
     //Attack variables
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask playerLayers;
     
-    public int attackDamage = 1;
+    public int attackDamage = 26;
     //controls variables
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -40,7 +36,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
         if (playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -75,7 +70,7 @@ public class PlayerController : MonoBehaviour
         //    Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         //}
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
+        //playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 }
