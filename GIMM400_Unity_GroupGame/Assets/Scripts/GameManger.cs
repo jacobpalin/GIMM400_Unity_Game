@@ -58,31 +58,30 @@ public class GameManger : MonoBehaviour
 
     void Update()
     {
-        //uncomment when player ready up bool is made
-        /*if(player1.GetComponent < -----player script----->.ready == true)
+        //uncomment when player1/2 are getting grabbed successfully
+        /*if (player1 != null)
         {
             player1Ready.SetActive(true);
             player1NotReady.SetActive(false);
         }
-        else if (player1.GetComponent < -----player script----->.ready == false)
+        else if (player1 == null)
         {
             player1Ready.SetActive(false);
             player1NotReady.SetActive(true);
         }
-        if (player2.GetComponent < -----player script----->.ready == true)
+        if (player2 != null)
         {
             player2Ready.SetActive(true);
             player2NotReady.SetActive(false);
         }
-        else if (player2.GetComponent < -----player script----->.ready == false)
+        else if (player2 == null)
         {
             player2Ready.SetActive(false);
             player2NotReady.SetActive(true);
         }*/
 
-        //uncomment when player ready up bool is made
-        //need to put Input.anyKey into player script and have it change a bool to make sure both players are ready
-        if (gameStarted == false && Input.anyKey/*player1.GetComponent<-----player script----->.ready == true && player2.GetComponent<-----player script----->.ready == true*/)
+        //uncomment when player1/2 are getting grabbed successfully
+        if (gameStarted == false && Input.anyKey /*&& player1 != null && player2 != null*/)
         {
             gameStarted = true;
         }
@@ -102,7 +101,7 @@ public class GameManger : MonoBehaviour
                 timer -= Time.deltaTime;
                 DisplayTime(timer);
                 //uncomment when player health is working
-                if (timer <= 0 /*|| player1.GetComponent<-----player script----->.health <= 0 || player2.GetComponent<-----player script----->.health <= 0*/)
+                if (timer <= 0 || player1.GetComponent<PlayerHealth>().currentHealth <= 0 || player2.GetComponent<PlayerHealth>().currentHealth <= 0)
                 {
                     //game over
                     gameOverUI.SetActive(true);
@@ -115,15 +114,15 @@ public class GameManger : MonoBehaviour
                         winnerText.text = "Tie";
                     }
                     //uncomment when player health is working
-                    /*else if(player1.health <= 0)
+                    else if(player1.GetComponent<PlayerHealth>().currentHealth <= 0)
                     {
                         winnerText.text = "Player 2 Wins";
                     }
-                    else if(player2.health <= 0)
+                    else if(player2.GetComponent<PlayerHealth>().currentHealth <= 0)
                     {
                         winnerText.text = "Player 1 Wins";
                     }
-                     */
+                     
                 }
             }
         }

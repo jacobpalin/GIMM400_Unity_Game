@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     //public float playerHealth;
     public int maxHealth = 78;
-    int currentHealth;
+    public int currentHealth;
     //public Image healthBar;
     //public GameObject UI;
     // Start is called before the first frame update
