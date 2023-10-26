@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class GameManger : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameManger : MonoBehaviour
     [Header("Players")]
     public GameObject player1;
     public GameObject player2;
+    //public GameObject playerManager;
 
     [Header("UI Elements")]
     [SerializeField] private Text timerText;
@@ -35,7 +37,7 @@ public class GameManger : MonoBehaviour
 
     void Start()
     {
-        UI = Instantiate(UI, transform.position, transform.rotation);
+        //UI = Instantiate(UI, transform.position, transform.rotation);
 
         Time.timeScale = 0;
 
@@ -101,7 +103,7 @@ public class GameManger : MonoBehaviour
                 timer -= Time.deltaTime;
                 DisplayTime(timer);
                 //uncomment when player health is working
-                if (timer <= 0 || player1.GetComponent<PlayerHealth>().currentHealth <= 0 || player2.GetComponent<PlayerHealth>().currentHealth <= 0)
+                if (timer <= 0 /*|| player1.GetComponent<PlayerHealth>().currentHealth <= 0 || player2.GetComponent<PlayerHealth>().currentHealth <= 0*/)
                 {
                     //game over
                     gameOverUI.SetActive(true);
@@ -114,14 +116,14 @@ public class GameManger : MonoBehaviour
                         winnerText.text = "Tie";
                     }
                     //uncomment when player health is working
-                    else if(player1.GetComponent<PlayerHealth>().currentHealth <= 0)
+                    /*else if(player1.GetComponent<PlayerHealth>().currentHealth <= 0)
                     {
                         winnerText.text = "Player 2 Wins";
                     }
                     else if(player2.GetComponent<PlayerHealth>().currentHealth <= 0)
                     {
                         winnerText.text = "Player 1 Wins";
-                    }
+                    }*/
                      
                 }
             }
