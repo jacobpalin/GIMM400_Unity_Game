@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_MaxPlayerCount: 2
   m_AllowJoining: 1
   m_JoinBehavior: 0
@@ -842,7 +842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31353182e22d39e4d989b6c1203c7065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnLocations: []
+  spawnLocations:
+  - {fileID: 1136398765}
 --- !u!1 &632095698 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: aba5b5cab94825940adc0ae975f2181a, type: 3}
@@ -874,6 +875,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aba5b5cab94825940adc0ae975f2181a, type: 3}
   m_PrefabInstance: {fileID: 683165516}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &674834820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 674834821}
+  m_Layer: 0
+  m_Name: SpawnBucket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &674834821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674834820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1136398765}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &683165516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1721,6 +1754,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aba5b5cab94825940adc0ae975f2181a, type: 3}
   m_PrefabInstance: {fileID: 1660722587}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1136398764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136398765}
+  m_Layer: 0
+  m_Name: SpawnPos1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1136398765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136398764}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 80, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 674834821}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1154751864 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f37aee150daa4c4690a968c6e8745eb, type: 3}
@@ -1998,6 +2062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1345888377}
   - component: {fileID: 1345888376}
+  - component: {fileID: 1345888378}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -2023,7 +2088,6 @@ MonoBehaviour:
   pressStartUI: {fileID: 1564333433}
   player1: {fileID: 0}
   player2: {fileID: 0}
-  playerManager: {fileID: 483739402}
   timerText: {fileID: 1883572315}
   startTimerText: {fileID: 1958897236}
   winnerText: {fileID: 452690229}
@@ -2048,6 +2112,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1345888378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345888375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31353182e22d39e4d989b6c1203c7065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnLocations: []
 --- !u!1001 &1370725614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4094,3 +4171,4 @@ SceneRoots:
   - {fileID: 1345888377}
   - {fileID: 483739404}
   - {fileID: 366587123}
+  - {fileID: 674834821}
