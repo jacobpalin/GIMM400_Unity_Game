@@ -19,9 +19,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput = Vector2.zero;
     private bool attacked = false;
 
+    public Animator animator;
+
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     public void OnMove(InputAction.CallbackContext context) 
@@ -43,6 +46,18 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
+
+        //animate movement
+        if(move == Vector3.zero)
+        {
+            //idle
+            animator.SetFloat("speed", 0);
+
+        }
+        else if(move != Vector3.zero)
+        {
+            animator.SetFloat("speed", 1);
+        }
 
         if (move != Vector3.zero)
         {
