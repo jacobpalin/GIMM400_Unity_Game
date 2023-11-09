@@ -9,6 +9,11 @@ public class PlayerDetails : MonoBehaviour
 
     void start()
     {
+        StartCoroutine(MoveSpawn());
+    }
+    IEnumerator MoveSpawn(){
+        yield return new WaitForSeconds(.1f);
         gameObject.transform.position = startPos;
+
     }
 }
