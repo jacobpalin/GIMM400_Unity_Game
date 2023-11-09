@@ -19,9 +19,14 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput = Vector2.zero;
     private bool attacked = false;
 
+    public GameObject childWithAnimator;
+
+    Animator animator;
+
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        animator = childWithAnimator.GetComponent<Animator>();
     }
 
     public void OnMove(InputAction.CallbackContext context) 
@@ -49,10 +54,21 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.forward = move;
         }
 
+        if(move != Vector3.zero)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+
+
         // this is when a player is attacking
         if (attacked == true)
         {
-            //Play attack animation
+            
+
 
             //Detect enemies in range
             UnityEngine.Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, playerLayers);
@@ -63,6 +79,19 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("We hit" + player.name);
             }
         }
+
+
+        if (attacked == true)
+        {
+            //Play attack animation
+            animator.SetBool("isAttacking", true);
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+        }
+
+
         //void OnDrawGizmosSelected()
         //{
         //    if (attackPoint == null)
