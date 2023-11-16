@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 public class PlayerHealth : MonoBehaviour
 {
     //public float playerHealth;
@@ -9,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     //public Image healthBar;
     //public GameObject UI;
+    public event Action<float> OnHealthPctChanged = delegate { };
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,9 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        float currentHealthPct = (float)currentHealth / (float)maxHealth;
+        OnHealthPctChanged(currentHealthPct);
         
         //add hurt animation here
         //animator.SetTrigger("Hurt");
