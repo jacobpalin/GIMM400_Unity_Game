@@ -6,7 +6,7 @@ using System;
 public class PlayerHealth : MonoBehaviour
 {
     //public float playerHealth;
-    public int maxHealth = 78;
+    public int maxHealth = 5;
     public int currentHealth;
     //public Image healthBar;
     //public GameObject UI;

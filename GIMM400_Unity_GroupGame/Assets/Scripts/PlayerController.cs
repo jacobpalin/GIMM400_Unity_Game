@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool groundedPlayer;
     private Vector2 movementInput = Vector2.zero;
     private bool attacked = false;
+    public float cooldown = 1.0f;
 
     public GameObject childWithAnimator;
 
@@ -38,9 +39,18 @@ public class PlayerController : MonoBehaviour
     {
         attacked = context.action.triggered;
     }
+    void reset_Cooldown()
+    {
+        cooldown += 1.0f;
+    }
 
     void Update()
     {
+        if (cooldown > 0)
+        {
+            cooldown -= Time.deltaTime;
+        }
+
         if (playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -65,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
 
         // this is when a player is attacking
-        if (attacked == true)
+        if (attacked == true && cooldown <= 0)
         {
             
 
@@ -78,6 +88,7 @@ public class PlayerController : MonoBehaviour
                 player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
                 Debug.Log("We hit" + player.name);
             }
+            reset_Cooldown();
         }
 
 
