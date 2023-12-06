@@ -16,5 +16,5 @@ void loop() {
   Serial.print(analogRead(Yaxis_pin));
   Serial.print(" ");
   Serial.println(digitalRead(SW_pin));
-  delay(200);
+  delay(19);
 }

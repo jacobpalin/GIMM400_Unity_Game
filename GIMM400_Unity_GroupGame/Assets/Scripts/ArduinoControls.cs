@@ -7,10 +7,8 @@ using UnityEngine.InputSystem;
 
 public class ArduinoControls : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private Rigidbody rb;
-    private SerialPort sp = new SerialPort("COM4", 57600);
-    private string[] splitLine;
+    private SerialPort sp;
+    [SerializeField] private string[] splitLine;
     private float x;
     private float y;
     private float button;
@@ -18,14 +16,15 @@ public class ArduinoControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sp = null;
         sp = new SerialPort("COM4", 57600);
         sp.Open();
-        sp.ReadTimeout = 1;
+        sp.ReadTimeout = 10;
         sp.DtrEnable = true;
         sp.RtsEnable = true;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (sp.IsOpen)
         {
@@ -42,39 +41,41 @@ public class ArduinoControls : MonoBehaviour
         else
         {
             Move();
-            Debug.Log(splitLine);
         }
     }
 
     void Move()
     {
-        Debug.Log(splitLine);
-        /*if (CMD == "")//right
+        if (y >= 550)//left
         {
-            rb.AddForce(moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            Debug.Log("left");
         }
 
-        if (CMD == "")//left
+        if (y <= 450)//right
         {
-            rb.AddForce(-moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            Debug.Log("right");
         }
 
-        if (CMD == "")//up
+        if (x <= 450)//up
         {
-            rb.AddForce(0, 0, moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+            Debug.Log("up");
         }
 
-        if (CMD == "")//down
+        if (x >= 550)//down
         {
-            rb.AddForce(0, 0, -moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
-        }*/
+            Debug.Log("down");
+        }
+        if (button == 0)//attack
+        {
+            Debug.Log("attack");
+        }
     }
 
     void ReadCom()
     {
         splitLine = sp.ReadLine().Split();
-        if (!float.TryParse(splitLine[0], out x)) print("Failed to parse x");
-        if (!float.TryParse(splitLine[1], out y)) print("Failed to parse y");
-        if (!float.TryParse(splitLine[2], out button)) print("Failed to parse button");
+        if (!float.TryParse(splitLine[1], out x)) print("Failed to parse x");
+        if (!float.TryParse(splitLine[2], out y)) print("Failed to parse y");
+        if (!float.TryParse(splitLine[3], out button)) print("Failed to parse button");
     }
 }
