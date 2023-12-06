@@ -83,7 +83,7 @@ public class GameManger : MonoBehaviour
         }
 
         //uncomment when player1/2 are getting grabbed successfully
-        if (gameStarted == false && Input.anyKey && player1 != null && player2 != null)
+        if (gameStarted == false && Input.anyKey && player1Ready == true && player2Ready == true)
         {
             gameStarted = true;
         }
