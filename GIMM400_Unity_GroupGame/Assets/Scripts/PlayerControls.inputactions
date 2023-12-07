@@ -92,6 +92,61 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "ArduinoStick",
+                    "id": "18195c0f-c186-4fcd-8cfe-41440c186acf",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f2575a44-aac9-459c-a354-606ccd871db3",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Arduino",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "f08727f6-9183-4989-9f9e-063c2e2545e5",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Arduino",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "d1a3d5a4-28c6-4709-b752-367c730930bf",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Arduino",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "c79d52f5-0846-44ff-9a0a-0c713dc4ecce",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Arduino",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "71892da5-e262-4a43-acd1-d656fb86fd5c",
                     "path": "<Keyboard>/space",
@@ -109,6 +164,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d69ab5a-9b66-4c83-af1f-725a847cd827",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Arduino",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -134,6 +200,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Arduino",
+            "bindingGroup": "Arduino",
+            "devices": [
+                {
+                    "devicePath": "<HID>",
                     "isOptional": false,
                     "isOR": false
                 }
