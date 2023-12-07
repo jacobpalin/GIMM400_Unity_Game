@@ -51,6 +51,7 @@ public class ArduinoControls : MonoBehaviour
         sp.DtrEnable = true;
         sp.RtsEnable = true;
     }
+
     void reset_Cooldown()
     {
         cooldown += 1.0f;
