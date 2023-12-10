@@ -53,7 +53,6 @@ public class RoamingAI : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("ai touched");
             Transform teleportToThis = points[Random.Range(0, points.Count)];
             this.transform.position = teleportToThis.position;
             Counter();
