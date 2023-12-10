@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float playerSpeed = 20.0f;
+    public float playerSpeed = 20.0f;
     //Attack variables
     public Transform attackPoint;
     public float attackRange = 0.5f;

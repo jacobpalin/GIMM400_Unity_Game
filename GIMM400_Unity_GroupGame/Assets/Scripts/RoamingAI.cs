@@ -18,14 +18,8 @@ public class RoamingAI : MonoBehaviour
     [SerializeField] public List<Transform> points; //empty game objects in the scene, manually drag them into inspector
     private int destPoint = 0; //current patrol point selected
 
-    public float radius; //radius of FOV
-    [Range(0, 360)] //FOV slider for angle of FOV
-    public float angle; 
-
-    [SerializeField] private LayerMask playerMask;
-    [SerializeField] private LayerMask obstacleMask;
-
-    public bool canSeePlayer;
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
 
     void Awake()
     {
@@ -37,39 +31,16 @@ public class RoamingAI : MonoBehaviour
         navMeshAgent.autoBraking = false;
 
         GotoNextPoint();
-        StartCoroutine(FOVRoutine());
     }
 
     void Update()
     {
-        float distanceFromPlayer = Vector2.Distance(moveToThisObject.position, transform.position); //calculates distance from player in vector2 for LOS
-        Vector3 distance = transform.position - moveToThisObject.position; //calculates distance from player in vector3 for movement
-        Vector3 newPos = transform.position + distance; //calculates position AI should run to
-
-        float distanceFromPlayer2 = Vector2.Distance(moveToThisObject2.position, transform.position);
-        Vector3 distance2 = transform.position - moveToThisObject2.position;
-        Vector3 newPos2 = transform.position + distance2;
+        
         // Choose the next destination point when the agent gets close to the current one.
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
             GotoNextPoint();
         //tells AI run away if in line of sight
-        if (canSeePlayer && distanceFromPlayer > playerDistance)
-        {
-            navMeshAgent.SetDestination(newPos);
-        }
-        else if (!canSeePlayer && distanceFromPlayer < playerDistance)
-        {
-            navMeshAgent.SetDestination(newPos);
-        }
-        if (canSeePlayer && distanceFromPlayer2 > playerDistance)
-        {
-            navMeshAgent.SetDestination(newPos2);
-        }
-        else if (!canSeePlayer && distanceFromPlayer2 < playerDistance)
-        {
-            navMeshAgent.SetDestination(newPos2);
-        }
-
+        
         //destroys after touched 3 times
         if (touched >= 3)
         {
@@ -82,9 +53,18 @@ public class RoamingAI : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("ai touched");
             Transform teleportToThis = points[Random.Range(0, points.Count)];
             this.transform.position = teleportToThis.position;
             Counter();
+        }
+        if(other.gameObject == player1 && touched >= 3)
+        {
+            player1.GetComponent<PlayerController>().playerSpeed = player1.GetComponent<PlayerController>().playerSpeed * 2;
+        }
+        else if (other.gameObject == player2 && touched >= 3)
+        {
+            player2.GetComponent<ArduinoControls>().playerSpeed = player2.GetComponent<ArduinoControls>().playerSpeed * 2;
         }
     }
 
@@ -100,51 +80,9 @@ public class RoamingAI : MonoBehaviour
         if (points.Count == 0)
             return;
 
+        destPoint = Random.Range(0, points.Count);
+
         // Set the agent to go to the currently selected destination.
         navMeshAgent.destination = points[destPoint].position;
-
-        // Choose the next point in the array as the destination,
-        // cycling to the start if necessary.
-        destPoint = (destPoint + 1) % points.Count;
-    }
-
-    //waits a bit before calling FOV check
-    private IEnumerator FOVRoutine()
-    {
-        WaitForSeconds wait = new WaitForSeconds(0.1f);
-
-        while (true)
-        {
-            yield return wait;
-            FieldOfViewCheck();
-        }
-    }
-
-    private void FieldOfViewCheck()
-    {
-        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, playerMask); //checks for objects with the player layer in a sphere
-
-        if (rangeChecks.Length != 0)
-        {
-            Transform target = rangeChecks[0].transform; //sets target to first player seen
-            Vector3 directionToTarget = (target.position - transform.position).normalized; //calculates direction of the player
-
-            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
-            {
-                float distanceToTarget = Vector3.Distance(transform.position, target.position); //calculates distance from player
-
-                //checks if AI can see player with direction, distance, and if any obstacles are in the way
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask))
-                {
-                    canSeePlayer = true;
-                }
-                else
-                    canSeePlayer = false;
-            }
-            else if (canSeePlayer)
-            {
-                canSeePlayer = false;
-            }
-        }
     }
 }
